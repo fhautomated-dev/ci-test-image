@@ -28,7 +28,7 @@ pipeline:
       - /secrets:/secrets
       - /var/run/docker.sock:/var/run/docker.sock
       - ${HOST_STORAGE_PATH}:/tmp/image-comparison
-    secrets: [ DOCKERHUB_USERNAME, DOCKERHUB_PASSWORD, DOCKERHUB_EMAIL, BUILD_TRIGGER_API_URL, BUILD_TRIGGER_API_USERNAME, BUILD_TRIGGER_API_PASSWORD, DEPENDENCY_GRAPH_URL, DEPENDENCY_GRAPH_USERNAME, DEPENDENCY_GRAPH_PASSWORD, TEMPLATE_UPDATER_URL, TEMPLATE_UPDATER_USERNAME, TEMPLATE_UPDATER_PASSWORD, host_storage_path ]
+    secrets: [ dockerhub_username, dockerhub_password, dockerhub_email, build_trigger_api_url, build_trigger_api_username, build_trigger_api_password, dependency_graph_url, dependency_graph_username, dependency_graph_password, template_updater_url, template_updater_username, template_updater_password, host_storage_path ]
     commands:
      - export SHARED_BUILD_STORAGE=$HOST_STORAGE_PATH
      - python3 -u /scripts/images/publish.py
