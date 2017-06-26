@@ -28,6 +28,5 @@ pipeline:
       - /secrets:/secrets
       - /var/run/docker.sock:/var/run/docker.sock
       - /shared_storage:/tmp/image-comparison
-    secrets: [ dockerhub_username, dockerhub_password, dockerhub_email, build_trigger_api_url, build_trigger_api_username, build_trigger_api_password, dependency_graph_url, dependency_graph_username, dependency_graph_password, template_updater_url, template_updater_username, template_updater_password, shared_build_storage ]
     commands:
      - python3 -u /scripts/images/publish.py
