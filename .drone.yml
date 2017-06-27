@@ -1,7 +1,7 @@
 pipeline:
   docker:
     image: plugins/docker
-    repo: build-${CI_REPO}-${CI_BUILD_NUMBER}/${DRONE_REPO_NAME}
+    repo: build-${DRONE_REPO_OWNER}-${DRONE_REPO_NAME}-${CI_BUILD_NUMBER}/${DRONE_REPO_NAME}
     
   build:
     when:
