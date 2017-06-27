@@ -1,4 +1,8 @@
 pipeline:
+  docker:
+    iamge: plugins/docker
+    repo: build-${CI_REPO}-${CI_BUILD_NUMBER}/${DRONE_REPO_NAME}
+    
   build:
     when:
       event: push
@@ -7,6 +11,7 @@ pipeline:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     commands:
+      - docker images
       - python3 -u /scripts/images/build.py
       
   spectests:
