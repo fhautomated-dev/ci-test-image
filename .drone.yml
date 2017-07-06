@@ -8,9 +8,7 @@ pipeline:
       - /secrets:/secrets
       - /var/run/docker.sock:/var/run/docker.sock
     commands:
-      - source /secrets/secrets
-      - docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}
-      - docker pull 1and1internet/template-library-tools
+	  - docker --config /secrets/ pull 1and1internet/template-library-tools
 
   build:
     when:
