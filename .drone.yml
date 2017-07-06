@@ -1,9 +1,21 @@
 pipeline:
+
+  tools:
+    when:
+      event: push
+    image: docker
+    volumes:
+      - /secrets:/secrets
+      - /var/run/docker.sock:/var/run/docker.sock
+    commands:
+      - source /secrets/secrets
+      - docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}
+      - docker pull 1and1internet/template-library-tools
+
   build:
     when:
       event: push
     image: fhautomateddev/library-ci-tools
-    pull: true
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     commands:
