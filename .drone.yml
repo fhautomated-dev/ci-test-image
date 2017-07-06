@@ -8,7 +8,7 @@ pipeline:
       - /secrets:/secrets
       - /var/run/docker.sock:/var/run/docker.sock
     commands:
-	  - docker --config /secrets/ pull 1and1internet/template-library-tools
+      - docker --config /secrets/ pull 1and1internet/template-library-tools
 
   build:
     when:
