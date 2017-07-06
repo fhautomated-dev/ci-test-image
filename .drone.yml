@@ -17,7 +17,7 @@ pipeline:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     commands:
-      - python3 -u /scripts/images/build.py
+      - make build IMAGE_NAME=build-${CI_REPO#*/}-${CI_BUILD_NUMBER}/${CI_REPO#*/}
       
   spectests:
     when:
@@ -26,9 +26,7 @@ pipeline:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     commands:
-      - export IMAGE=build-${CI_REPO#*/}-${CI_BUILD_NUMBER}/${CI_REPO#*/}
-      - echo ${IMAGE}
-      - rspec -f documentation tests/serverspec.rb
+      - make do-test IMAGE_NAME=build-${CI_REPO#*/}-${CI_BUILD_NUMBER}/${CI_REPO#*/}
       
   publish:
     when:
