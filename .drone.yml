@@ -76,5 +76,5 @@ pipeline:
       - /secrets:/secrets
     commands:
       - env
-      - docker rm $(docker ps -a | grep -v "\${HOSTNAME}" | awk '{print $1}') || true
+      - docker rm $(docker ps -a | grep -v "$${HOSTNAME}" | awk '{print $1}') || true
       - docker rmi -f $(docker images -q) || true
