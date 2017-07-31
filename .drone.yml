@@ -1,6 +1,19 @@
 ---
 pipeline:
 
+  clean_docker_test:
+    when:
+      event: push
+      status: [success, failure]
+    image: docker
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /secrets:/secrets
+    commands:
+      - env
+      - docker rm $(docker ps -a | grep -v "\${HOSTNAME}" | awk '{print $1}') || true
+      - docker rmi -f $(docker images -q) || true
+
   pull:
     when:
       event: push
@@ -63,5 +76,5 @@ pipeline:
       - /secrets:/secrets
     commands:
       - env
-      - docker rm $(docker ps -a | grep -v "${HOSTNAME}" | awk '{print $1}') || true
+      - docker rm $(docker ps -a | grep -v "\${HOSTNAME}" | awk '{print $1}') || true
       - docker rmi -f $(docker images -q) || true
